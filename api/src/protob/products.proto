@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package products;
+
+message Products{
+    string thumbnail = 1;
+    string name = 2;
+    string price = 3;
+    string igredients = 4;
+    bool disponibility = 5;
+    string volume = 6;
+    string others =7;
+}
+
+message RegisterProducts{
+    Products product = 1;
+}
+
+message GetProducts{
+    string name = 1;
+}
+
+message UpdateProducts{
+    Products product = 1;
+}
+
+message DeleteProducts{
+    int32 id = 1;
+}
+
+message ProductsResponse{
+    Products product = 1;
+}
+
+message Empty{}
+
+message DoneResponse{
+    bool done = 1;
+}
+message Clone{
+    int32 id = 1;
+}
+
+message FindResponse{
+    Products product = 1;
+}
+
+service ProductService{
+    rpc create(RegisterProducts) returns (ProductsResponse);
+    rpc get(GetProducts) returns (ProductsResponse);
+    rpc update(UpdateProducts) returns (DoneResponse);
+    rpc del(DeleteProducts) returns (DoneResponse);
+    rpc clone(Clone) returns (ProductsResponse);
+    rpc find(Empty) returns (FindResponse);
+}
